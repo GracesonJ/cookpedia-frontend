@@ -50,16 +50,16 @@
         </div>
         <div class="col-lg-1"></div>
         <div class="col-lg-4">
-            <form class="border rounded shadow p-5">
+            <form [formGroup]="testimonyForm" (ngSubmit)="addTestimony()" class="border rounded shadow p-5">
                 <h3>Client Testimony</h3>
                 <div class="mb-3 mt-5">
-                    <input name="name" formControlName="name"  type="text" class="form-control" placeholder="Name">
+                    <input name="name" formControlName="name" formControlName="name"  type="text" class="form-control" placeholder="Name">
                 </div>
                 <div class="mb-3 ">
-                    <input name="email" formControlName="email" type="text" class="form-control" placeholder="E Mail">
+                    <input name="email" formControlName="email" formControlName="email" type="text" class="form-control" placeholder="E Mail">
                 </div>
                 <div class="mb-3 ">
-                    <textarea name="message" formControlName="message"  type="text" class="form-control" placeholder="Message"></textarea> 
+                    <textarea name="message" formControlName="message" formControlName="message"  type="text" class="form-control" placeholder="Message"></textarea> 
                 </div>
                 <p class="my-4 text-secondary">By Submitting, your agreeing the terms and condition of our website. We may use your details in our site.</p>
                 <div class="float-end">
