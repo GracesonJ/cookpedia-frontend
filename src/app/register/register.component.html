@@ -1,1 +1,47 @@
-<p>register works!</p>
+<div class="container">
+    <div style="height: 100vh; background-image: url('https://static.vecteezy.com/system/resources/thumbnails/033/027/755/small_2x/flat-lay-vegetables-on-white-background-food-and-diet-concept-ai-generated-free-photo.jpg'); background-size: cover;" class="row align-items-center">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-4">
+        <form [formGroup]="registerForm" (ngSubmit)="register()" class="shadow border rounded p-5 mt-5">
+          <div class="mb-5 text-center">
+            <h3><i class="fa-solid fa-graduation-cap"></i> Cookpedia</h3>
+          </div>
+          <div class="mb-3">
+            <input name="username" formControlName="username" type="text" class="form-control" placeholder="Username" />
+          </div>
+          @if(registerForm.get('username')?.errors && registerForm.get('username')?.touched){
+            <div class="text-danger fw-bolder mb-3">*Invalid Username</div>}
+       
+          <div class="mb-3">
+            <input name="email" formControlName="email" type="email" class="form-control" placeholder="E Mail" />
+          </div>
+          
+          @if(registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
+            <div class="text-danger fw-bolder mb-3">*Invalid E Mail</div>}
+         
+          <div class="mb-3">
+            <input name="password" formControlName="password" type="password" class="form-control" placeholder="Password" />
+          </div>
+          @if(registerForm.get('password')?.errors && registerForm.get('password')?.touched)
+           { <div class="text-danger fw-bolder mb-3">*Invalid Password</div>}
+         
+          <div class="d-grid mt-2">
+            <button type="submit" class="btn btn-success">register</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-1"></div>
+      <div class="col-lg-4">
+        <h1>Create New Account</h1>
+        <h5>What you will get?</h5>
+        <ul class="mt-5">
+          <li>Different Recipes</li>
+          <li>Easy way to Make Recipe</li>
+          <li>Save your Favorite Recipes</li>
+          <li>Download your Recipes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- footer -->
+  <app-footer></app-footer>
