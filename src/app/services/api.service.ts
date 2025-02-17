@@ -23,4 +23,9 @@ export class ApiService {
   registerApi(reqBody:any){
     return this.http.post(`${this.server_url}/register`, reqBody)
   }
+
+  // login
+  loginApi(reqBody:any){
+    return this.http.post(`${this.server_url}/login`, reqBody)
+  }
 }
