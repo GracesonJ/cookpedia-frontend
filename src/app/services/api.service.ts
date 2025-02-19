@@ -46,11 +46,19 @@ export class ApiService {
 
   // related Recipe Api
   relatedRecipeApi(cuisine:string){
-    return this.http.get(`${this.server_url}/related-recipes?cuisine=${cuisine}`,this.appendToken())
+    return this.http.get(`${this.server_url}/related-recipes?cuisine=${cuisine}`, this.appendToken())
   }
 
+  // Download Recipe Api
+  // recipe/67b44c0cdff57192daf7c410/download
+  downloadRecipeApi(recipeId:any, reqBody:any){
+    return this.http.post(`${this.server_url}/recipe/${recipeId}/download`, reqBody, this.appendToken())
+  }
   
-
+ //recipe/:id/save
+ saveRecipeAPI(recipeId:string,reqBody:any){
+  return this.http.post(`${this.server_url}/recipe/${recipeId}/save`,reqBody,this.appendToken())
+}
 
 
 }
