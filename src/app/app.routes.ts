@@ -12,6 +12,13 @@ import { PnfComponent } from './pnf/pnf.component';
 
 export const routes: Routes = [
 
+      //lazy loaded admin module : //http://localhost:4200/admin, authorised
+      {
+        path:'admin', 
+        // canActivate:[authGuard], 
+        loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)
+    },
+
     //http://localhost:4200/
     {
         path:"", component : HomeComponent, title:"Home Page"

@@ -80,4 +80,24 @@ export class ApiService {
     return this.http.post(`${this.server_url}/user/edit`, reqBody, this.appendToken())
   }
 
+  //all-users
+  allUsersAPI(){
+    return this.http.get(`${this.server_url}/all-users`,this.appendToken())
+  }
+
+   //download-list
+   allDownloadListAPI(){
+    return this.http.get(`${this.server_url}/download-list`,this.appendToken())
+  }
+
+   //all-feedback
+   getallFeedbackListAPI(){
+    return this.http.get(`${this.server_url}/all-feedback`,this.appendToken())
+  }
+
+   //feedback/6750283f6e6c436259862c60/update?status=Approved
+   updateFeedbackStatusAPI(feedBackId:string,status:string){
+    return this.http.get(`${this.server_url}/feedback/${feedBackId}/update?status=${status}`,this.appendToken())
+  }
+
 }
