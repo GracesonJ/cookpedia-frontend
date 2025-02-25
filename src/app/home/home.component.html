@@ -77,18 +77,13 @@
         <h1>Client Testimonials</h1>
         <marquee behavior="" direction="">
             <div class="d-flex my-5">
-                <div class="rounded border w-75 p-3 me-2">
-                    <p style="white-space: normal; width: 100%; text-align: justify;">Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Ducimus magnam harum ratione, aut fugit quis deleniti nesciunt
-                        neque asperiores at accusantium, nihil alias aspernatur architecto? Ea ad cupiditate repellat
-                        molestias!</p>
-                </div>
-                <div class="rounded border w-75 p-3 me-2">
-                    <p style="white-space: normal; width: 100%; text-align: justify;">Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Ducimus magnam harum ratione, aut fugit quis deleniti nesciunt
-                        neque asperiores at accusantium, nihil alias aspernatur architecto? Ea ad cupiditate repellat
-                        molestias!</p>
-                </div>
+                <!-- testimony -->
+                @for (item of allFeedbacksList; track $index) {
+                    <div class="rounded border w-50 p-3 me-2">
+                        <h5>{{item.name}}</h5>
+                        <p style="white-space: normal; width: 100%; text-align: justify;" >{{item.message}}</p>
+                    </div>
+                }
             </div>
         </marquee>
     </div>
