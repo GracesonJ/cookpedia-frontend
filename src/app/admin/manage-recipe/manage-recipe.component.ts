@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { RecipeModel } from '../model/recipeModel';
@@ -9,9 +9,11 @@ import { RecipeModel } from '../model/recipeModel';
   styleUrl: './manage-recipe.component.css'
 })
 export class ManageRecipeComponent {
+
+  @Input() id !: string
+  recipeDetails:RecipeModel = {}
   cuisineArray:any = []
   mealTypeArray:any = []
-  recipeDetails:RecipeModel = {}
   ingredients:any = []
   instructions:any = []
   mealArray:any = []
@@ -22,12 +24,12 @@ export class ManageRecipeComponent {
   }
   getAllRecipes(){
     this.api.getAllRecipesApi().subscribe((res:any)=>{
-      // if(this.id){
-      //   this.recipeDetails = res.find((item:any)=>item._id==this.id)
-      //   this.ingredients = this.recipeDetails.ingredients
-      //   this.instructions = this.recipeDetails.instructions
-      //   this.mealArray = this.recipeDetails.mealType
-      // }
+      if(this.id){
+        this.recipeDetails = res.find((item:any)=>item._id==this.id)
+        this.ingredients = this.recipeDetails.ingredients
+        this.instructions = this.recipeDetails.instructions
+        this.mealArray = this.recipeDetails.mealType
+      }
       res.forEach((item:any)=>{
         !this.cuisineArray.includes(item.cuisine) && this.cuisineArray.push(item.cuisine)
       })
@@ -74,6 +76,41 @@ export class ManageRecipeComponent {
     }
     console.log(this.mealArray);
   }
+
+  addRecipe(){
+    console.log(this.recipeDetails);    
+    //1. add ingredients , instructions and mealArray to recipeDetails
+    this.recipeDetails.ingredients = this.ingredients
+    this.recipeDetails.instructions = this.instructions
+    this.recipeDetails.mealType = this.mealArray
+    const {name,ingredients,instructions,prepTimeMinutes,cookTimeMinutes,servings,difficulty,cuisine,caloriesPerServing,image,mealType} = this.recipeDetails
+    //2. check all fileds have values in recipeDetails
+    if(name && ingredients!.length>0 && instructions!.length>0 && prepTimeMinutes && cookTimeMinutes && servings && difficulty && cuisine && caloriesPerServing && image && mealType!.length>0){
+      //alert("proceed to api call")
+    //3. if all values are present make api call,
+    this.api.addRecipeAPI(this.recipeDetails).subscribe({
+      next:(res:any)=>{
+            //  - if api call success then clear all fileds, alert "recipe added", redirect to all recipe page
+        alert("Recipe successfully added to our collection!!!")
+        this.recipeDetails = {}
+        this.ingredients = []
+        this.instructions = []
+        this.mealArray = []
+        this.router.navigateByUrl("/admin/recipe-list")
+      },
+      error:(reason:any)=>{
+        //  - if api call failed then alert failed msg, clear name field of recipe details
+        alert(reason.error)
+        this.recipeDetails.name = ""
+     }
+    })
+    
+    }else{
+    // 4. if all values are not present then alert 'fill the form'
+      alert("Please fill the form completely!!!")
+    }
+  }
+
 
 
 }

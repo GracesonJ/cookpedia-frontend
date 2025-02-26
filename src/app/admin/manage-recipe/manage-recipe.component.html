@@ -4,8 +4,11 @@
             <app-sidebar></app-sidebar>
         </div>
         <div class="col-lg-10">
-           
+           @if (id) {
+            <h1 class="text-center my-3">Update Recipe Details</h1>
+           }@else {
             <h1 class="text-center my-3">Add Recipe Details</h1>
+           }
             <div class="container my-5 border rounded text-center p-5 shadow w-75">
                 @if (recipeDetails.image) {
                     <img width="100px" height="100px" class="mb-2" [src]="recipeDetails.image" alt="no Image">
@@ -79,11 +82,16 @@
                 <div class="mb-3">
                     <div class="border rounded p-2">
                         <p class="mb-2">Choose Meal Type of the Recipe :
-                         
+                            @if (id) {
                                 @for (item of mealArray; track $index) {
-                                    <span class="m-1 border rounded p-1"> {{item}} <button class="btn"><i class="fa-solid fa-close"></i></button> </span>
+                                    <span class="m-1 border rounded p-1"> {{item}} <button  class="btn"><i class="fa-solid fa-close"></i></button> </span>
                                 }
-                    
+                            }
+                            @else {
+                                @for (item of mealArray; track $index) {
+                                    <span class="m-1 border rounded p-1"> {{item}} </span>
+                                }
+                            }
                         </p>
                         <div class="d-flex flex-wrap my-1">
                             @for (meal of mealTypeArray; track $index) {
@@ -97,7 +105,11 @@
                         </div>
                     </div>
                 </div>
-                <button  class="btn btn-success">Add Recipe</button>
+                @if (id) {
+                    <button class="btn btn-primary">Update Recipe</button>
+                }@else {
+                    <button (click)="addRecipe()" class="btn btn-success">Add Recipe</button>
+                }
             </div>
         </div>
     </div>
