@@ -24,10 +24,10 @@ export class RecipeListComponent {
     })
   }
 
-  // removeRecipe(id:string){
-  //   this.api.deleteRecipeAPI(id).subscribe((res:any)=>{
-  //     this.getAllRecipes()
-  //   })
-  // }
+  removeRecipe(id:string){
+    this.api.deleteRecipeAPI(id).subscribe((res:any)=>{
+      this.getAllRecipes()
+    })
+  }
 
 }
