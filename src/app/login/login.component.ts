@@ -30,8 +30,8 @@ export class LoginComponent {
       // api call
       this.api.loginApi({email, password}).subscribe({
         next:(res:any)=>{
-          localStorage.setItem("user", JSON.stringify(res.user))
-          localStorage.setItem("token", res.token)
+          sessionStorage.setItem("user", JSON.stringify(res.user))
+          sessionStorage.setItem("token", res.token)
           // call get chart data
           this.api.getChartData()
           this.loginForm.reset()
