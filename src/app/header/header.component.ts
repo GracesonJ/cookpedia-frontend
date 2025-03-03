@@ -27,6 +27,7 @@ export class HeaderComponent {
   }
 
   logout(){
+    localStorage.clear()
     sessionStorage.clear()
     this.isLoggedIn = false
     this.loginUsername = ""

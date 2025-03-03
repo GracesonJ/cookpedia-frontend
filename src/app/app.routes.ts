@@ -9,13 +9,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { SavedRecipeComponent } from './saved-recipe/saved-recipe.component';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
 import { PnfComponent } from './pnf/pnf.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
 
       //lazy loaded admin module : //http://localhost:4200/admin, authorised
       {
         path:'admin', 
-        // canActivate:[authGuard], 
+        canActivate:[authGuard], 
         loadChildren:()=>import('./admin/admin.module').then(m=>m.AdminModule)
     },
 
@@ -45,15 +46,15 @@ export const routes: Routes = [
     },
     //http://localhost:4200/profile
     {
-        path:"profile", component:ProfileComponent, title:"Profile"
+        path:"profile",  canActivate:[authGuard], component:ProfileComponent, title:"Profile"
     },
     //http://localhost:4200/save-recipe
     {
-        path:"save-recipe", component:SavedRecipeComponent, title:"Save Recipes"
+        path:"save-recipe",  canActivate:[authGuard], component:SavedRecipeComponent, title:"Save Recipes"
     },
     //http://localhost:4200/recipe/id/view
     {
-        path:"recipe/:id/view", component:ViewRecipeComponent, title:"View Recipe"
+        path:"recipe/:id/view",  canActivate:[authGuard], component:ViewRecipeComponent, title:"View Recipe"
     },
      //http://localhost:4200
      {
